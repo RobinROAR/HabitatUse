@@ -11,19 +11,25 @@ import scipy.stats as st
 
 from gdalconst import *
 
-#preferences  参数选择
+#preferences  参数选择  QHL
+#~ C1=[[11,21],[30,101],[110,131],[140,151],[160,200],[210,221]]        #landuse
+#~ C2=[[-1,-0.5],[-0.5,0],[0,0.25],[0.25,0.4],[0.4,1]]      				#ndvi07
+#~ C3 =[[2800,3200],[3200,3300],[3300,3400],[3400,3600],[3600,4000]]		#dem
+#~ C4 = [[0,500],[500,2000],[2000,4000],[4000,99999999]]         	#waterDistance
+#~ C5 = [[0,200],[200,500],[500,2000],[2000,99999]]             #road distace
+#~ Category =[C1,C2,C3,C4,C5]
+#~ tif = ['tif/07QHH/landuse.tif','tif/07QHH/NDVI/ndvi07.tif','tif/07QHH/dem/qhhdem.tif','tif/07QHH/waterDistance/waterDistance.tif','tif/07QHH/road/road.tif']
+#~ pos = ['point/QHH/QHLPU.csv','point/QHH/QHLPA.csv']
 
-C1=[[11,21],[30,101],[110,131],[140,151],[160,200],[210,221]]        #landuse
-C2=[[-1,-0.5],[-0.5,0],[0,0.25],[0.25,0.4],[0.4,1]]      				#ndvi07
-C3 =[[2800,3200],[3200,3300],[3300,3400],[3400,3600],[3600,4000]]		#dem
+ # 参数选择ＬＲＷ
+C1=[[11,21],[30,101],[110,131],[140,151],[160,200],[210,219],[220,300]]    #landuse
+C2=[[-1,-0.5],[-0.5,0],[0,0.25],[0.25,1]]      				#ndvi
+C3 =[[2800,3500],[3500,3800],[3800,4200],[4200,5600]]		#dem
 C4 = [[0,500],[500,2000],[2000,4000],[4000,99999999]]         	#waterDistance
-C5 = [[0,200],[200,500],[500,2000],[2000,99999]]             #road distace
+Category =[C1,C2,C3,C4]
+tif = ['tif/LRW/landuselrw/landuselrw.tif','tif/LRW/NDVI/ndvilrw1.tif','tif/LRW/dem/lrdem.tif','tif/LRW/WD/wdlrw1.tif']
+pos = ['point/LRW/LRWPU.csv','point/LRW/LRWPA.csv']
 
-Category =[C1,C2,C3,C4,C5]
-tif = ['tif/07QHH/landuse.tif','tif/07QHH/NDVI/ndvi07.tif','tif/07QHH/dem/qhhdem.tif','tif/07QHH/waterDistance/waterDistance.tif','tif/07QHH/road/road.tif']
-
-#pos = ['point/QHH/07qhhU.csv','point/QHH/07qhhA.csv']
-pos = ['point/QHH/0708QHH/0708qhhPU.csv','point/QHH/0708QHH/0708qhhPA.csv']
 
 #DataNum use to  store  Birds' records num 
 dataNum = []

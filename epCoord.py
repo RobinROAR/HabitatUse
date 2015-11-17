@@ -21,7 +21,7 @@ NLRW = [30]
 def writeCsv():								
 	global List
 	
-	writer = csv.writer(file('Source/LRWbirdCoor0708.csv','wb'))
+	writer = csv.writer(file('Source/LRWPU.csv','wb'))
 	writer.writerow(['x','y'])
 	for line in List:
 		writer.writerow(line)
@@ -49,7 +49,7 @@ print len(date)
 
 
 conn = MySQLdb.connect(host='localhost',user = 'root', passwd = '123456')
-conn.select_db('gps')
+conn.select_db('GPStemp')
 List=[]
 
 for i in range(len(birds)):
@@ -58,8 +58,12 @@ for i in range(len(birds)):
 	#~ sql = "select animal,longitude,latitude,DATE(date_time) as date from gps_bh where animal = %s and latitude >= %s and latitude < %s and longitude >= %s and longitude < %s and date_time BETWEEN %s and %s  order by date asc "
 	#~ param=[birds[i],QHH[3],QHH[0],QHH[1],QHH[2],date[i][0],date[i][1]]
 	
-	sql = "select animal,longitude,latitude,DATE(date_time) as date from gps_bh where animal = %s and latitude >= %s and latitude < %s and longitude >= %s and longitude < %s and date_time BETWEEN %s and %s  order by date asc "
+	#has region define
+	sql = "select animal,longitude,latitude,date_time as date from gps_bh where animal = %s and latitude >= %s and latitude < %s and longitude >= %s and longitude < %s and date_time BETWEEN %s and %s  order by date asc "
 	param=[birds[i],LRW[3],LRW[0],LRW[1],LRW[2],date[i][0],date[i][1]]
+	
+	#~ sql = "select DISTINCT animal,longitude,latitude,date_time as date from gps_bh where animal = %s and date_time BETWEEN %s and %s  order by date asc "
+	#~ param=[birds[i],date[i][0],date[i][1]]
 	
 	cursor = conn.cursor()
 	n=cursor.execute(sql,param)
@@ -67,7 +71,9 @@ for i in range(len(birds)):
 	for row in cursor.fetchall():
 		x = row[1]
 		y = row[2]
-		temp=[x,y]
+		z = row[0]
+		#~ q = row[3]
+		temp=[z,x,y]
 		List.append(temp)
 
 writeCsv()
