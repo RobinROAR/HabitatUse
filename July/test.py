@@ -5,24 +5,30 @@ from PIL import Image
 from glob import glob
 import os
 import numpy as np
+import shutil
+
+
+def listjpg(path):
+    #遍历文件夹
+    folders = None
+    for root,dir,file in os.walk(path):
+        if len(dir)!=0:
+            folders = [os.path.join(root,d) for d in dir]
+        else:
+            continue
+    #分离图片
+    cnt = 1
+    for _ in folders:
+        imgs = glob(_+'/*.jpg')
+        for i in imgs:
+            shutil.copyfile(i, 'data/train/'+str(cnt)+'.jpg')
+            cnt += 1
 
 
 
-#
-# kde = KernelDensity(bandwidth=0.04, metric='haversine',
-#                     kernel='gaussian', algorithm='ball_tree')
-# kde.fit(points)
 
-import pandas as pd
-import numpy as np
-from scipy import stats
-from sklearn.neighbors import KernelDensity
-import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
-import geoplotlib
 
-a = ['123','566','5555']
 
-print a+'rrr'
+listjpg('data/train/')
 
 
