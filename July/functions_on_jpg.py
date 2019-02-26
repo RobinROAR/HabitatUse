@@ -53,13 +53,17 @@ def merge_images():
 
     path = "data/jpg"
     images = []
+    temp1 = []
+    temp2 = []
     #遍历图像文件夹，联结目录与图像名，存储到两个list中
     for root,dirs,files in os.walk(path):
-        if len(dirs) == 0:
-            temp =[os.path.join(root,i) for i in files ]
-            images.append(temp)
+        if (len(dirs) == 0) and ('R' in root):
+            temp1 =[os.path.join(root,i) for i in files ]
+        elif (len(dirs) == 0) and ('H' in root):
+            temp2 = [os.path.join(root, i) for i in files]
         else:
             continue
+    images= [temp1,temp2]
     #配对图像
     cnt = 0
     for i in images[0]:
@@ -103,12 +107,16 @@ def merge_images():
 
 if __name__ == '__main__':
 
-    #image2tiles(256,256,'data/jpg/')
 
+
+
+
+    # os.mkdir('data/jpg')
+    # tif2jpg('data/0710-kde.tif', 'data/jpg/0710H_.jpg',0)
+    # tif2jpg('data/0710.tif','data/jpg/0710R_.jpg',1)
+    #
+    image2tiles(256,256,'data/jpg/')
     merge_images()
-
-    #tif2jpg('data/modis/new.tif', 'data/temp/05252007H_.jpg',0)
-    #tif2jpg('data/modis/newH.tif','data/temp/05252007R_.jpg',1)
 
     # im1 = Image.open('data/temp/05252007H.jpg')
     # im2 = Image.open('data/temp/05252007R.jpg')
