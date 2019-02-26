@@ -10,7 +10,7 @@ import numpy
 
 
 
-def create_shp_rec(xmin,xmax,ymin,ymax):
+def create_shp_rec(xmin,xmax,ymin,ymax,name):
     '''
     Create a Rectangular shapfile via given coordinates
     :param xmin:
@@ -29,7 +29,7 @@ def create_shp_rec(xmin,xmax,ymin,ymax):
     poly = ogr.Geometry(ogr.wkbPolygon)
     poly.AddGeometry(rec)
     # Save extent to a new Shapefile
-    outShapefile = "data/shp/rec.shp"
+    outShapefile = name
     outDriver = ogr.GetDriverByName("ESRI Shapefile")
     # Remove output shapefile if it already exists
     if os.path.exists(outShapefile):
@@ -138,11 +138,18 @@ def create_buffer(inputfn, outputBufferfn, bufferDist):
 #main
 if __name__ == '__main__':
 
-    #create a rec
-    # x_min, x_max, y_min, y_max = 99.2, 101.011, 36.255, 37.625
-    x_min, x_max, y_min, y_max = 99.49,100.97,37.5,36.3
+    #create a r
+    #x_min, x_max, y_min, y_max =  96.6,102.4,38.8,34.2
+    #x_min, x_max, y_min, y_max = 99.49,100.97,37.5,36.3
+    #Small UD1
+    #x_min, x_max, y_min, y_max = 99.478, 100.249, 37.190, 36.645
+    #Small UD2
+    x_min, x_max, y_min, y_max = 96.840, 98.809, 35.639,34.648
+    #BIG ud
+    #x_min, x_max, y_min, y_max = 96.800, 101.041, 37.353, 34.739
+    name = './data/s2.shp'
 
-    create_shp_rec(x_min,x_max,y_min,y_max)
+    create_shp_rec(x_min,x_max,y_min,y_max,name)
 
     #create buffer
     # inputfn = 'data/shp/points.shp'

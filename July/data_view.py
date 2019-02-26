@@ -23,17 +23,19 @@ import geoplotlib
 
 def readData():
     # 读取数据至dataframe
-    df = pd.read_csv('./data/birdDataLG.csv')
+    df = pd.read_csv('./data/1.csv')
     df.columns = [u'animal', u'lon', u'lat', u'datetime']
     # 转换datetime为时间格式
     df['datetime'] = pd.to_datetime(df.datetime)
     # 先将日期转换为时间个事，在比较
-    temp = df[(df.animal.isin(['BH07_67582', 'BH07_67690', 'BH07_67695', 'BH07_67698', 'BH07_74898'])) & (df.datetime <= pd.to_datetime('2007-09-25 03:00:00')) & (df.datetime >= pd.to_datetime('2007-05-25 03:00:00'))]
+    #temp = df[(df.animal.isin(['BH07_67582', 'BH07_67690', 'BH07_67695', 'BH07_67698', 'BH07_74898'])) & (df.datetime >= pd.to_datetime('2007-01-01 03:00:00')) & (df.datetime <= pd.to_datetime('2007-12-01 03:00:00'))]
+    temp = df[(df.animal.isin(['BH07_74898'])) & (df.datetime >= pd.to_datetime('2008-01-01 03:00:00')) & (df.datetime <= pd.to_datetime('2008-12-01 03:00:00'))]
     #temp = df[(df.datetime <= pd.to_datetime('2007-5-25 03:00:00')) & (df.datetime >= pd.to_datetime('2007-03-25 03:00:00')) ]
     # temp = df[df.animal.isin(['BH07_67582', 'BH07_67690', 'BH07_67695', 'BH07_67698', 'BH07_74898'])]
 
 
     print temp.count()
+
     # 遍历结果
     return temp
 
@@ -49,6 +51,8 @@ def writeCSV(a):
 
 temp = readData()
 
+
+
 def add_corner(temp):
 
     temp.loc[temp.index.max() + 1] = {'animal':'ed', 'lon': 99.49,'lat':37.5,'datetime' : ''}
@@ -59,14 +63,28 @@ def add_corner(temp):
     print temp.count(),'++++++++++++++++'+str(temp.shape[0]+1)
     temp.loc[temp.index.max() + 1]  = {'animal':'ed1', 'lon': 100.97,'lat':36.3,'datetime' : ''}
     print temp.count(),'++++++++++++++++'+str(temp.shape[0]+1)
-    writeCSV(temp)
+
+    temp.loc[temp.index.max() + 1] = {'animal': 'ed', 'lon': 96.4, 'lat': 35.5, 'datetime': ''}
+    print temp.count(), '++++++++++++++++' + str(temp.shape[0] + 1)
+    temp.loc[temp.index.max() + 1] = {'animal': 'ed', 'lon': 96.4, 'lat': 34.4, 'datetime': ''}
+    print temp.count(), '++++++++++++++++' + str(temp.shape[0] + 1)
+    temp.loc[temp.index.max() + 1] = {'animal': 'ed1', 'lon': 98.6, 'lat': 35.5, 'datetime': ''}
+    print temp.count(), '++++++++++++++++' + str(temp.shape[0] + 1)
+    temp.loc[temp.index.max() + 1] = {'animal': 'ed1', 'lon': 98.6, 'lat': 34.4, 'datetime': ''}
+    print temp.count(), '++++++++++++++++' + str(temp.shape[0] + 1)
 
 
-#add_corner(temp)
-data = geoplotlib.utils.DataAccessObject(temp)
-geoplotlib.dot(data)
-#geoplotlib.kde(data,0.1)
-geoplotlib.show()
 
+
+#writeCSV(readData())
+
+
+
+# #add_corner(temp)
+# data = geoplotlib.utils.DataAccessObject(temp)
+# geoplotlib.dot(data)
+# geoplotlib.kde(data,0.1)
+# geoplotlib.show()
+# #
 
 

@@ -1,28 +1,28 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-July23 2017
-#Robin
-from PIL import Image
-from glob import glob
-import os
-import numpy as np
+# -*- coding:utf-8 -*-
 
-
-
-#
-# kde = KernelDensity(bandwidth=0.04, metric='haversine',
-#                     kernel='gaussian', algorithm='ball_tree')
-# kde.fit(points)
+#Test file
 
 import pandas as pd
-import numpy as np
-from scipy import stats
-from sklearn.neighbors import KernelDensity
-import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
-import geoplotlib
+import functions_on_shp as fs
+import numpy
+from osgeo import ogr,osr
+import os
 
-a = ['123','566','5555']
+def readData():
+    result = []
+    #读取数据至dataframe
+    df = pd.read_csv('./data/birdDataLG.csv')
+    #转换datetime为时间格式
+    df['datetime'] = pd.to_datetime(df.datetime)
+    #先将日期转换为时间个事，在比较
 
-print a+'rrr'
+    df.sort_values(['dattime'], ascending = 0)
 
 
+    return df
+
+if __name__ == '__main__':
+
+    d = readData()
+    print d
